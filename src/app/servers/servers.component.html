@@ -11,10 +11,19 @@ class="form-control"
 
 
 <p>{{ serverName }}</p>
-<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Adicionar Servidor</button>
+<button 
+class="btn btn-primary" 
+[disabled]="!allowNewServer" 
+(click)="onCreateServer()">Adicionar Servidor</button>
 
+<!--
 <p>{{ allowNewServer }}</p>
 <p [innerText]="allowNewServer"></p>
+<p> {{ serverCreationStatus }}</p> -->
+<p *ngIf="servercreated; else noServer">O servidor foi criado, o nome é: {{ serverName }}</p>
+<ng-template #noServer>
+    <p>Nenhum servidor foi criado!</p>
 
-<p> {{ serverCreationStatus }}</p>
-<app-server></app-server>
+</ng-template>
+<app-server *ngFor="let server of servers"></app-server>
+
